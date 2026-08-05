@@ -76,35 +76,42 @@ class ValorantHUDGUI(ctk.CTk):
         )
         grid_title.pack(anchor="w", padx=25, pady=(15, 5))
 
-        # Agent Grid Frame
-        self.grid_frame = ctk.CTkFrame(self, fg_color=CARD_GRAY, corner_radius=8)
+        # Agent Grid Frame (Scrollable)
+        self.grid_frame = ctk.CTkScrollableFrame(self, fg_color=CARD_GRAY, corner_radius=8, scrollbar_button_color=CRIMSON, scrollbar_button_hover_color="#D13644")
         self.grid_frame.pack(fill="both", expand=True, padx=25, pady=5)
 
-        agents = ["Jett", "Reyna", "Raze", "Chamber", "Iso", "Clove", "Phoenix", "Yoru", "Omen", "Fade", "Sova", "Viper"]
+        agents = [
+            "Astra", "Breach", "Brimstone", "Chamber", "Clove", "Cypher",
+            "Deadlock", "Fade", "Gekko", "Harbor", "Iso", "Jett",
+            "Kayo", "Killjoy", "Neon", "Omen", "Phoenix", "Raze",
+            "Reyna", "Sage", "Skye", "Sova", "Viper", "Vyse",
+            "Waylay", "Yoru"
+        ]
         self.agent_buttons = {}
 
-        cols = 3
+        cols = 4
         for idx, agent in enumerate(agents):
             r = idx // cols
             c = idx % cols
             btn = ctk.CTkButton(
                 self.grid_frame,
                 text=agent.upper(),
-                font=ctk.CTkFont(family="Consolas", size=13, weight="bold"),
+                font=ctk.CTkFont(family="Consolas", size=11, weight="bold"),
                 fg_color="#181B1E",
                 hover_color=CRIMSON,
                 text_color=TEXT_WHITE,
                 border_width=2,
                 border_color=CRIMSON if agent == self.selected_agent else "#2A2F33",
                 corner_radius=6,
-                height=50,
+                height=45,
                 command=lambda a=agent: self.select_agent(a)
             )
-            btn.grid(row=r, column=c, padx=8, pady=8, sticky="nsew")
+            btn.grid(row=r, column=c, padx=5, pady=5, sticky="nsew")
             self.agent_buttons[agent] = btn
 
         for i in range(cols):
             self.grid_frame.columnconfigure(i, weight=1)
+
 
         # Action Button Frame
         action_frame = ctk.CTkFrame(self, fg_color="transparent")
