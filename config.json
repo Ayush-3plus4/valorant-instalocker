@@ -1,0 +1,26 @@
+{
+  "resolution": "1920x1080",
+  "lock_in_button": {
+    "x": 960,
+    "y": 815
+  },
+  "agents": {
+    "Jett": { "x": 704, "y": 925 },
+    "Reyna": { "x": 868, "y": 925 },
+    "Raze": { "x": 813, "y": 925 },
+    "Chamber": { "x": 649, "y": 925 },
+    "Iso": { "x": 759, "y": 925 },
+    "Clove": { "x": 594, "y": 925 },
+    "Phoenix": { "x": 923, "y": 925 },
+    "Yoru": { "x": 978, "y": 925 },
+    "Omen": { "x": 1033, "y": 925 },
+    "Fade": { "x": 1088, "y": 925 },
+    "Sova": { "x": 1143, "y": 925 },
+    "Viper": { "x": 1198, "y": 925 }
+  },
+  "detection": {
+    "scan_delay_ms": 10,
+    "confidence_threshold": 0.8,
+    "lock_delay_sec": 0.05
+  }
+}
