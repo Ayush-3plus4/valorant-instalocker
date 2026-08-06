@@ -5,67 +5,68 @@
 ![OpenCV](https://img.shields.io/badge/Engine-OpenCV%20%2B%20MSS-00F0FF?style=for-the-badge)
 ![Developer](https://img.shields.io/badge/Developer-Ayush--3plus4-FF4655?style=for-the-badge&logo=github)
 
-An ultra-fast, high-performance Valorant Agent Instalocker featuring a **Valorant Tactical HUD** GUI interface, low-latency screen scanning (<10ms via `mss`), hardware direct input automation, and multi-threaded responsive design.
+An ultra-fast, high-performance Valorant Agent Instalocker featuring a **Valorant Tactical HUD** GUI interface built with CustomTkinter, low-latency screen scanning (<10ms via `mss`), computer vision template matching (`opencv-python`), hardware DirectInput mouse automation (`pydirectinput`), and a multi-threaded responsive architecture.
 
 Developed by **[Ayush-3plus4](https://github.com/Ayush-3plus4)**.
 
 ---
 
-## 🔥 Key Features
+## 🎨 Visual Layout & Aesthetics
 
-- **Valorant Tactical HUD Theme:** Designed with Valorant's dark slate (`#0F1923`), crimson accent (`#FF4655`), off-white typography, and glowing status badges.
-- **Ultra-Fast MSS Screen Capture:** Achieves ultra-low latency screen capture (<10ms) without frame drops.
-- **DirectInput Mouse Simulation:** Low-level `ctypes` Windows API mouse automation to bypass game engine input suppression.
-- **Multi-Threaded Architecture:** Keeps the GUI operating smoothly at 60 FPS while the detector scans asynchronously.
-- **Global Emergency Abort (F8):** Instantly cancel active agent searching by pressing `F8`.
-- **Configurable Coordinates:** Full flexibility via `config.json` for custom monitor resolutions and offsets.
-
----
-
-## 🛠️ Installation & Setup
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/Ayush-3plus4/valorant-instalocker.git
-   cd valorant-instalocker
-   ```
-
-2. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run Application:**
-   ```bash
-   python main.py
-   ```
+- **Dark Slate Palette:** Primary background `#0F1923` matched with `#1F2326` card containers.
+- **Crimson Accents:** Signature Valorant `#FF4655` highlights on buttons, active borders, and scrollbars.
+- **Tactical Status Card:** Live updating badge displaying `[IDLE]`, `[SEARCHING...]`, and `[LOCKED]`.
+- **Card-Based Agent Grid:** Scrollable grid organizing agent target cards with smooth hover feedback.
+- **Clickable Footer Attribution:** Direct link to the developer's GitHub profile (`https://github.com/Ayush-3plus4`).
 
 ---
 
-## 🎮 How to Use
+## 🔥 Features & Architecture
 
-1. Launch **VALORANT** and ensure your display setting is **1920x1080 Borderless or Fullscreen**.
-2. Run `ValorantInstalocker.exe` or `python main.py`.
-3. Click your desired agent (e.g., **JETT**, **REYNA**, **RAZE**, **CHAMBER**, **ISO**).
-4. Click **ACTIVATE LOCK-IN**.
-5. Once match creation begins, the bot instantly selects and locks in your chosen agent.
-6. Press **F8** at any time to abort the search.
+- **MSS Screen Capture:** Fast low-overhead desktop frame capture.
+- **OpenCV Pattern Recognition:** Support for template matching via `cv2.matchTemplate`.
+- **PyDirectInput Automation:** Hardware-level direct mouse cursor simulation.
+- **Global Hotkey Abort (F8):** Instant emergency cancel via background `keyboard` listener.
+- **Configurable Coordinates:** JSON-driven screen coordinates for 1920x1080 resolution in `config.json`.
 
 ---
 
-## 🏗️ Building Executable (.EXE)
+## 🛠️ Setup & Installation Instructions
 
-To compile the application into a standalone Windows executable:
+### Prerequisites
+- Python 3.9 or higher
+- Display resolution set to **1920x1080**
+
+### 1. Clone / Navigate to Directory
+```bash
+cd valorant-instalocker
+```
+
+### 2. Install Required Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Launch Application
+```bash
+python main.py
+```
+
+---
+
+## 🏗️ Building Standalone Executable (.EXE)
+
+Compile into a single executable file using `pyinstaller`:
 
 ```bash
 pyinstaller --noconsole --onefile --name "ValorantInstalocker" main.py
 ```
 
-The output file will be generated in `./dist/ValorantInstalocker.exe`.
+The resulting binary will be located at `dist/ValorantInstalocker.exe`.
 
 ---
 
-## 👤 Developer & License
+## 👤 Credits & Author
 
-Developed with ❤️ by **[Ayush-3plus4](https://github.com/Ayush-3plus4)**.  
-Open-source under the MIT License.
+Created by **[Ayush-3plus4](https://github.com/Ayush-3plus4)**  
+GitHub: [https://github.com/Ayush-3plus4](https://github.com/Ayush-3plus4)
