@@ -5,12 +5,35 @@ import threading
 import mss
 import cv2
 import numpy as np
+import ctypes
 import pydirectinput
 import keyboard
 
 # Configure pydirectinput failsafe and pause settings
 pydirectinput.FAILSAFE = False
 pydirectinput.PAUSE = 0.01
+
+# Windows API constants for mouse actions
+MOUSEEVENTF_LEFTDOWN = 0x0002
+MOUSEEVENTF_LEFTUP = 0x0004
+
+def vanguard_click(x: int, y: int):
+    """
+    Sends a low-level Windows API click with a 50ms hold delay 
+    so Valorant's frame engine registers the input.
+    """
+    # 1. Move cursor to target
+    ctypes.windll.user32.SetCursorPos(int(x), int(y))
+    time.sleep(0.05)  # Pause to let the game register cursor position
+    
+    # 2. Press mouse down
+    ctypes.windll.user32.mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+    time.sleep(0.05)  # Hold click for 50ms so game registers the tick
+    
+    # 3. Release mouse
+    ctypes.windll.user32.mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+    time.sleep(0.05)
+
 
 class InstalockDetector:
     def __init__(self, config_path="config.json", status_callback=None):
@@ -82,8 +105,16 @@ class InstalockDetector:
         return False, (0, 0)
 
     def _instalock_loop(self):
-        agent_coords = self.config.get("agents", {}).get(self.selected_agent)
-        lock_coords = self.config.get("lock_in_button", {"x": 960, "y": 815})
+        agents_dict = self.config.get("agents", {})
+        agent_coords = agents_dict.get(self.selected_agent)
+        if not agent_coords:
+            # Case-insensitive fallback matching (e.g. "Jett" vs "JETT")
+            for name, coords in agents_dict.items():
+                if name.upper() == self.selected_agent.upper():
+                    agent_coords = coords
+                    break
+
+        lock_coords = self.config.get("lock_button") or self.config.get("lock_in_button", {"x": 960, "y": 710})
         scan_delay = self.config.get("detection", {}).get("scan_delay_ms", 10) / 1000.0
         lock_delay = self.config.get("detection", {}).get("lock_delay_sec", 0.05)
 
@@ -113,16 +144,14 @@ class InstalockDetector:
                 if found:
                     target_x, target_y = matched_coords
 
-            # 3. High-speed DirectInput automation
+            # 3. Low-level Vanguard API automation
             try:
                 # Click target agent icon
-                pydirectinput.moveTo(target_x, target_y)
-                pydirectinput.click(target_x, target_y)
+                vanguard_click(target_x, target_y)
                 time.sleep(lock_delay)
 
                 # Click Lock In button
-                pydirectinput.moveTo(lock_coords["x"], lock_coords["y"])
-                pydirectinput.click(lock_coords["x"], lock_coords["y"])
+                vanguard_click(lock_coords["x"], lock_coords["y"])
                 time.sleep(lock_delay)
 
                 self.running = False

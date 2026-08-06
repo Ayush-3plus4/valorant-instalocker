@@ -83,9 +83,9 @@ class ValorantHUDGUI(ctk.CTk):
         agents = [
             "Astra", "Breach", "Brimstone", "Chamber", "Clove", "Cypher",
             "Deadlock", "Fade", "Gekko", "Harbor", "Iso", "Jett",
-            "Kayo", "Killjoy", "Neon", "Omen", "Phoenix", "Raze",
-            "Reyna", "Sage", "Skye", "Sova", "Viper", "Vyse",
-            "Waylay", "Yoru"
+            "Kayo", "Killjoy", "Miks", "Neon", "Omen", "Phoenix",
+            "Raze", "Reyna", "Sage", "Skye", "Sova", "Tejo",
+            "Veto", "Viper", "Vyse", "Waylay", "Yoru"
         ]
         self.agent_buttons = {}
 
