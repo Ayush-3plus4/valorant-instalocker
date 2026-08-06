@@ -5,7 +5,7 @@
 ![OpenCV](https://img.shields.io/badge/Engine-OpenCV%20%2B%20MSS-00F0FF?style=for-the-badge)
 ![Developer](https://img.shields.io/badge/Developer-Ayush--3plus4-FF4655?style=for-the-badge&logo=github)
 
-An ultra-fast, high-performance Valorant Agent Instalocker featuring a **Valorant Tactical HUD** GUI interface built with CustomTkinter, low-latency screen scanning (<10ms via `mss`), computer vision template matching (`opencv-python`), hardware DirectInput mouse automation (`pydirectinput`), and a multi-threaded responsive architecture.
+An ultra-fast, high-performance Valorant Agent Instalocker featuring a **Valorant Tactical HUD** GUI interface built with CustomTkinter, low-latency screen scanning (<10ms via `mss`), computer vision template matching (`opencv-python`), low-level Vanguard Windows API mouse automation (`ctypes`), and a multi-threaded responsive architecture.
 
 Developed by **[Ayush-3plus4](https://github.com/Ayush-3plus4)**.
 
@@ -16,7 +16,7 @@ Developed by **[Ayush-3plus4](https://github.com/Ayush-3plus4)**.
 - **Dark Slate Palette:** Primary background `#0F1923` matched with `#1F2326` card containers.
 - **Crimson Accents:** Signature Valorant `#FF4655` highlights on buttons, active borders, and scrollbars.
 - **Tactical Status Card:** Live updating badge displaying `[IDLE]`, `[SEARCHING...]`, and `[LOCKED]`.
-- **Card-Based Agent Grid:** Scrollable grid organizing agent target cards with smooth hover feedback.
+- **Card-Based Agent Grid:** Scrollable grid organizing all 29 agent target cards with smooth hover feedback.
 - **Clickable Footer Attribution:** Direct link to the developer's GitHub profile (`https://github.com/Ayush-3plus4`).
 
 ---
@@ -25,7 +25,8 @@ Developed by **[Ayush-3plus4](https://github.com/Ayush-3plus4)**.
 
 - **MSS Screen Capture:** Fast low-overhead desktop frame capture.
 - **OpenCV Pattern Recognition:** Support for template matching via `cv2.matchTemplate`.
-- **PyDirectInput Automation:** Hardware-level direct mouse cursor simulation.
+- **Low-Level Vanguard Click Engine:** Bypasses input drops using `ctypes.windll.user32` (`SetCursorPos` & `mouse_event`) with a 50ms click-hold delay for Vanguard tick sync.
+- **Complete 29 Agent Matrix:** Pre-calibrated 1920x1080 screen coordinates for all 29 Valorant agents.
 - **Global Hotkey Abort (F8):** Instant emergency cancel via background `keyboard` listener.
 - **Configurable Coordinates:** JSON-driven screen coordinates for 1920x1080 resolution in `config.json`.
 
